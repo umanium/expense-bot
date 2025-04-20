@@ -11,7 +11,7 @@ enum TableType:
   case Boolean
 
 case class DbOperator(dbConfig: DbConfig):
-  private val sqliteFilename: String = dbConfig.get("sqlite_filename")
+  private val sqliteFilename: String = dbConfig.sqliteFilename
   private implicit lazy val connection: Connection =
     Class.forName("org.sqlite.JDBC")
     DriverManager.getConnection(s"jdbc:sqlite:$sqliteFilename")

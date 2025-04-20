@@ -6,8 +6,8 @@ import sttp.model.StatusCode
 
 case class TelegramBot(config: BotConfig):
   def sendMessage(message: String): Unit =
-    val token = config.get("token")
-    val chat_id = config.get("chat_id")
+    val token = config.token
+    val chat_id = config.chatId
     val response: Response[String] = quickRequest
       .post(uri"https://api.telegram.org/bot$token/sendMessage")
       .body(Map("chat_id" -> chat_id, "text" -> message))
