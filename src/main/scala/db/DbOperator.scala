@@ -32,10 +32,14 @@ case class DbOperator(dbConfig: DbConfig):
 
       stmt.execute(createSql)
 
-  def insertDataToTable(tableName: String, data: Seq[String]): Unit =
+  def insertSingleDataToTable(tableName: String, data: Seq[String]): Unit =
+    insertDataToTable(tableName, Seq(data))
+
+  def insertDataToTable(tableName: String, data: Seq[Seq[String]]): Unit =
     Using(connection.createStatement()): stmt =>
+      val dataTuples: Seq[String] = data.map(d => s"(${d.map(v => s"\"$v\"").mkString(",")})")
       val insertSql =
-        s"INSERT INTO $tableName VALUES (${data.map(v=>s"\"$v\"").mkString(",")})"
+        s"INSERT INTO $tableName VALUES ${dataTuples.mkString(",")}"
 
       stmt.execute(insertSql)
 

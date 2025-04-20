@@ -18,15 +18,30 @@ class dbOperatorTest extends AnyFunSpec with should.Matchers:
       op.getTablesInDb should contain (tableName)
       op.deleteAllTables()
 
-  describe("insertDataToTable"):
-    val tableName: String = "test_insert_table"
+  describe("insertSingleDataToTable"):
+    val tableName: String = "test_insert_single_table"
     op.deleteAllTables()
 
     it("should insert one row of data to the table"):
       op.createTable(tableName, tableCols)
 
-      op.insertDataToTable(tableName, Seq("1", "Agus"))
-      op.insertDataToTable(tableName, Seq("2", "Dadang"))
+      op.insertSingleDataToTable(tableName, Seq("1", "Agus"))
+      op.insertSingleDataToTable(tableName, Seq("2", "Dadang"))
+      val tableData: Seq[Seq[String]] = op.getDataInTable(tableName)
+
+      tableData.length shouldEqual 2
+      tableData.head shouldEqual Seq("1", "Agus")
+      tableData(1) shouldEqual Seq("2", "Dadang")
+      op.deleteAllTables()
+
+  describe("insertDataToTable"):
+    val tableName: String = "test_insert_table"
+    op.deleteAllTables()
+
+    it("should insert multiple row of data to the table"):
+      op.createTable(tableName, tableCols)
+
+      op.insertDataToTable(tableName, Seq(Seq("1", "Agus"), Seq("2", "Dadang")))
       val tableData: Seq[Seq[String]] = op.getDataInTable(tableName)
 
       tableData.length shouldEqual 2
