@@ -12,5 +12,6 @@ lazy val root = project
     libraryDependencies += "com.lihaoyi" %% "mainargs" % "0.7.6",
     libraryDependencies += "com.indoorvivants" %%  "toml" % "0.3.0",
     libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.49.1.0",
-    libraryDependencies += "com.softwaremill.sttp.client4" %% "core" % "4.0.3"
+    libraryDependencies += "com.softwaremill.sttp.client4" %% "core" % "4.0.3",
+    libraryDependencies += "readsgsheet" % "readsgsheet_3" % "0.1.0-SNAPSHOT"
   )
