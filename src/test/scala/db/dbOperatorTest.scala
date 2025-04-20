@@ -7,7 +7,7 @@ class dbOperatorTest extends AnyFunSpec with should.Matchers:
   val dbLocation: String = getClass.getResource("/test.db").getPath
   val dbConfig: DbConfig = DbConfig(Map("sqlite_filename" -> dbLocation))
   val op: DbOperator = DbOperator(dbConfig)
-  val tableCols: Map[String, TableType] = Map("id" -> TableType.Int, "name" -> TableType.String)
+  val tableCols: Seq[(String, TableType)] = Seq(("id", TableType.Int), ("name", TableType.String))
   describe("createTable"):
     val tableName: String = "test_table"
     op.deleteAllTables()

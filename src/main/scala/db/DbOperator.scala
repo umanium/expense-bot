@@ -16,7 +16,7 @@ case class DbOperator(dbConfig: DbConfig):
     Class.forName("org.sqlite.JDBC")
     DriverManager.getConnection(s"jdbc:sqlite:$sqliteFilename")
 
-  def createTable(tableName: String, fields: Map[String, TableType]): Unit =
+  def createTable(tableName: String, fields: Seq[(String, TableType)]): Unit =
     def getTypeString(tableType: TableType): String =
       tableType match
         case TableType.String => "TEXT"
