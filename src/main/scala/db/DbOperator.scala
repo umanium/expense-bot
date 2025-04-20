@@ -71,10 +71,13 @@ case class DbOperator(dbConfig: DbConfig):
       case Failure(exception) => throw exception
       case Success(value) => value
 
+  def dropTable(tableName: String): Unit =
+    Using(connection.createStatement()): stmt =>
+      val dropSql: String = s"DROP TABLE $tableName"
+
+      stmt.execute(dropSql)
+
   def deleteAllTables(): Unit =
     val tables: Seq[String] = getTablesInDb
     tables.foreach: table =>
-      Using(connection.createStatement()): stmt =>
-        val dropSql: String = s"DROP TABLE $table"
-
-        stmt.execute(dropSql)
+      dropTable(table)
