@@ -38,7 +38,7 @@ object Main:
       else
         println("no data extracted")
 
-      Thread.sleep(2000)
+      Thread.sleep(30000)
 
     val iter: Iterator[Unit] = Iterator.continually(run())
     iter.takeWhile(_ => true).foreach(_ => ())
