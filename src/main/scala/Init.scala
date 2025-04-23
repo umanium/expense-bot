@@ -26,5 +26,5 @@ object Init:
     dbOperator.insertDataToTable(dbConfig.dataTableName, data)
     println("data had been initialized")
 
-  def main(args: Array[String]): Unit = ParserForMethods(this).runOrExit(args)
+  def main(args: Array[String]): Unit = ParserForMethods(this).runOrExit(args.toIndexedSeq)
 
