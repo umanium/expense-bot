@@ -44,13 +44,13 @@ object Main:
         else
           printWithTime("no data extracted")
       catch
-        case e: Throwable =>
+        case e: Exception =>
           printWithTime("Got an error")
           e.printStackTrace()
 
       Thread.sleep(30000)
 
-    val iter: Iterator[Unit] = Iterator.continually(run())
-    iter.takeWhile(_ => true).foreach(_ => ())
+    while true do
+      run()
 
   def main(args: Array[String]): Unit = ParserForMethods(this).runOrExit(args.toIndexedSeq)
